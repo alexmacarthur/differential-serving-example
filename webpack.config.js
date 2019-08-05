@@ -1,48 +1,13 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const merge = require('webpack-merge');
+const baseConfiguration = require("./webpack.base");
 
-const baseConfiguration = {
-    mode: process.env.NODE_ENV,
-    entry: {
-        global: [`./assets/js/scripts.js`, `./assets/scss/style.scss`],
-    },
+const modernConfiguration = merge.smart(baseConfiguration, {
     output: {
-        filename: 'scripts.min.js',
-        path: path.join(__dirname, `/assets/dist`, '/js')
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: `../css/style.min.css`
-        })
-    ],
-    module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            includePaths: [path.join(__dirname, '/node_modules')]
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.js$/,
-                include: /(js)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        cacheDirectory: true
-                    }
-                }
-            }
-        ]
+        filename: 'scripts.modern.min.js',
     }
-};
+});
 
-module.exports = baseConfiguration;
+module.exports = [
+    baseConfiguration, 
+    modernConfiguration
+];
