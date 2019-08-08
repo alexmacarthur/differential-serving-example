@@ -34,6 +34,10 @@ const modernConfiguration = merge.smart(baseConfiguration, {
     }
 });
 
+
+// We're only interested in dealing with JS files, so remove any other entry points.
+modernConfiguration.entry.global = modernConfiguration.entry.global.filter(file => file.includes('.js'));
+
 module.exports = [
     baseConfiguration, 
     modernConfiguration
