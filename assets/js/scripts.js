@@ -10,7 +10,7 @@ const possibleBreeds = [
     "Beagle", 
     "Bearded Collie", 
     "Bloodhound"
-]
+];
 
 const possibleTricks = [
     "sit",
@@ -21,7 +21,7 @@ const possibleTricks = [
     "roll over", 
     "catch Frisbee",
     "balance treat on nose"
-]
+];
 
 const allDogs = [...new Array(10)].map(() => {
     let randomBreed = possibleBreeds[Math.floor(Math.random() * possibleBreeds.length)];
@@ -37,11 +37,27 @@ const allDogs = [...new Array(10)].map(() => {
     return dog
 });
 
-possibleTricks.forEach(trick => {
+const $trickList = document.getElementById('trickList');
+const $breedList = document.getElementById('breedList');
+
+possibleTricks.forEach(possibleTrick => {
 
     let dogsThatCanDoTrick = allDogs.filter(dog => {
-        return dog.canDoTrick(trick);
+        return dog.canDoTrick(possibleTrick);
     });
 
-    console.log(`Out of ${allDogs.length} dogs, ${dogsThatCanDoTrick.length} can ${trick}.`);
+    let textToAppend = `<li>Out of ${allDogs.length} dogs, ${dogsThatCanDoTrick.length} can ${possibleTrick}.</li>`;
+
+    $trickList.insertAdjacentHTML('beforeend', textToAppend);
+});
+
+possibleBreeds.forEach(possibleBreed => {
+    let dogsOfPossibleBreed = allDogs.filter(dog => {
+        let { breed } = dog;
+        return breed === possibleBreed;
+    });
+
+    let textToAppend = `<li>Out of ${allDogs.length} dogs, ${dogsOfPossibleBreed.length} are of this breed: ${possibleBreed}.</li>`;
+
+    $breedList.insertAdjacentHTML('beforeend', textToAppend);
 });
