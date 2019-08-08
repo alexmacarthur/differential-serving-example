@@ -3,6 +3,19 @@
         <meta charset="utf-8" />
     </head>
     <body>
-        <script src="assets/dist/js/scripts.min.js"></script>
+        <script>
+            function isModern() {
+                try { 
+                    eval('"use strict"; class foo {}'); 
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            let scriptTag = document.createElement('script');
+            scriptTag.setAttribute('src', isModern() ? 'assets/dist/js/scripts.modern.min.js' : 'assets/dist/js/scripts.min.js');
+            document.body.appendChild(scriptTag);
+        </script>
     </body>
 </html>
