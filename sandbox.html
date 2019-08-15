@@ -7,6 +7,14 @@
         <br>
         <ul id="breedList"></ul>
 
+        <script type="module" src="assets/dist/js/scripts.modern.min.js">
+            // alert('The browser DOES support ES modules');
+        </script>
+        <script nomodule src="assets/dist/js/scripts.modern.js">
+            // alert('The browser DOES NOT support ES modules');
+        </script>
+
+        <!--
         <script>
             function isModern() {
                 try { 
@@ -21,5 +29,6 @@
             scriptTag.setAttribute('src', isModern() ? 'assets/dist/js/scripts.modern.min.js' : 'assets/dist/js/scripts.min.js');
             document.body.appendChild(scriptTag);
         </script>
+        --> 
     </body>
 </html>
